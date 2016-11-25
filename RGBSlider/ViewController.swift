@@ -35,7 +35,17 @@ class ViewController: UIViewController {
         let green = CGFloat(greenSlider.value)
         let blue = CGFloat(blueSlider.value)
         colorSquare.backgroundColor = UIColor(red: red, green: green, blue: blue, alpha: 1)
+        let defaults =  UserDefaults.standard
+        defaults.set(redSlider.value,   forKey: "red")
+        defaults.set(greenSlider.value, forKey: "green")
+        defaults.set(blueSlider.value,  forkey: "blue")
+        defaults.synchronize()
     }
-
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        if (segue.identifier == "openColor") {
+            let newViewController = segue.destination
+            newViewController.view.backgroundColor = colorSquare.backgroundColor
+        }
+    }
 }
 
